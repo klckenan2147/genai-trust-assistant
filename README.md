@@ -52,3 +52,12 @@ Testnet deployment.
 ## Contribution
 
 Built as a GenLayer ecosystem project demonstrating trusted AI decision workflows.
+## Intelligent Contract Workflow
+
+TrustVerifier manages decentralized AI verification:
+
+1. AI content is submitted
+2. Multiple validators provide scores
+3. Consensus score is calculated
+4. Trust level is generated
+5. Verification history is stored
