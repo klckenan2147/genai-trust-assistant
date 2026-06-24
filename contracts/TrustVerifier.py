@@ -1,9 +1,8 @@
 """
 GenAI Trust Assistant
-GenLayer Intelligent Contract Prototype
+GenLayer Intelligent Contract
 
-This contract stores AI verification results
-and generates trust levels.
+AI verification workflow using decentralized validation logic.
 """
 
 
@@ -13,12 +12,17 @@ class TrustVerifier:
         self.records = []
 
 
-    def submit_verification(self, content, score):
+    def verify_ai_content(self, content, validator_results):
+
+        consensus_score = self.calculate_consensus(
+            validator_results
+        )
 
         result = {
             "content": content,
-            "trust_score": score,
-            "status": self.calculate_status(score)
+            "validator_results": validator_results,
+            "trust_score": consensus_score,
+            "status": self.get_status(consensus_score)
         }
 
         self.records.append(result)
@@ -26,7 +30,17 @@ class TrustVerifier:
         return result
 
 
-    def calculate_status(self, score):
+    def calculate_consensus(self, validator_results):
+
+        if len(validator_results) == 0:
+            return 0
+
+        total = sum(validator_results)
+
+        return total // len(validator_results)
+
+
+    def get_status(self, score):
 
         if score >= 80:
             return "Verified"
